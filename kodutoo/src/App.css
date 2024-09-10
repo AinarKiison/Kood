@@ -1,0 +1,65 @@
+.App {
+  text-align: center;
+}
+.nupp{
+  background-color: rgb(43, 209, 43);
+  text-decoration-color: grey;
+  color:gray;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.nupp:hover{
+  width: 150px;
+  height: 150px;
+  cursor: grab;
+}
+.nupp:active{
+  cursor: grab;
+}
+
+.sinine{
+  color: blue;
+  font-style: italic;
+}
+.sinine:hover{
+  font-size: 24px;
+}
+.roheline{
+  color: rgb(55, 143, 44);
+  font-weight: bold;
+  border-style: solid;
+  border-color: red;
+}
+.roheline:hover{ 
+  border-color: brown;}
+
+.pilt{
+  width: 700px;
+  height: 100%;
+  float: right;
+}
+.pilt:hover{
+  border-radius: 10%;
+}
+.pilt:active{
+  opacity: 50%;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+  
+  
