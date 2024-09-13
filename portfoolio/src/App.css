@@ -53,3 +53,9 @@
   color: #7ba9c3;
   cursor: pointer;
 }
+.aktiivne{
+  background-color: orange;
+}
+.mitteaktiivne{
+  background-color: 0;
+}

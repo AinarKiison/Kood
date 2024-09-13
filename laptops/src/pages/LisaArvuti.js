@@ -1,20 +1,26 @@
-import {useState} from "react";
+import{useState} from "react";
 
 function LisaArvuti() {
-    const[message, setMessage] = useState("Lisa arvuti!")
+  const [message, setMessage] = useState("Lisa Arvuti");
+  const [n2itaNuppu, uuendaN2itaNuppu] = useState(true);
 
-    return (
-    <div>
-        <div>Sõnum: {message} </div>
-        <label>Mark</label> <br />
-        <input type="text"/> <br />
-        <label>Mudel</label> <br />
-        <input type="text"/> <br />
-        <label>Maksumus</label> <br />
-        <input type="number"/> <br />
-        {message === "Lisa arvuti!" && <button onClick={()=> setMessage("Lisatud!")}>Sisesta</button> }
-    </div>
-  )
+
+  function addProduct() {
+    setMessage("Arvuti lisatud!");
+    uuendaN2itaNuppu(false);
+  }
+
+  return (
+  <div>
+      <div>Sõnum: {message}</div>
+      <label>Mark</label> <br />
+      <input type="text"/> <br />
+      <label>Mudel</label> <br />
+      <input type="text"/> <br />
+      <label>Maksumus</label> <br />
+      <input type="number"/> <br />
+      {n2itaNuppu === true && <button onClick={() => addProduct()}> Sisesta </button> }
+  </div>)
 }
 
 export default LisaArvuti

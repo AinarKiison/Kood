@@ -7,8 +7,8 @@ function App() {
   return (
     <div >
       <Link to="/"><button>Avalehele</button></Link>
-      <Link to="/lisa-tegelane"><button>Avalehele</button></Link>
-      <Link to="/valitud-tegelased"><button>Avalehele</button></Link>
+      <Link to="/lisa-tegelane"><button>Tegelase lisamine</button></Link>
+      <Link to="/valitud-tegelased"><button>Tegelased</button></Link>
 
       <Routes>
         <Route path="" element={ <Avaleht />}/>
