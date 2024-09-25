@@ -32,7 +32,6 @@ function App() {
         { sisselogitud === "ei" && <div>
           <label>Kasutajanimi</label>
           <input ref={kasutajaNimiRef} type="text" />
-          <label>Parool</label>
           <input ref={paroolRef} type="password" />
       </div>}
 
