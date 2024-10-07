@@ -34,7 +34,7 @@ function Kasutajad() {
     <button onClick={resetKasutajad} style={{ margin: "10px" }}>1. Reset</button>
     <button onClick={()=> n2itaKasutajad10()}>2. Kuva kasutajad, kelle kasutajanimi on robhkem kui 10 tähte</button>
     <button onClick={()=> leiaIndexJaDelete()}>3. Kustuta rea viimane</button>
-    <button onClick={()=> esimeneNimiC()}>5. Kasutaja nimi algab C-ga </button>
+    <button onClick={()=> esimeneNimiC()}>5. Esimene Kasutajanimi, mis algab C-ga </button>
 
     
     
