@@ -22,7 +22,7 @@ function Kasutajad() {
 
   //!!!!!!!!!
   const esimeneNimiC = () => {
-    const leitud = kasutajad.find(kasutaja => kasutaja.name.substring(0,1)==="C");
+    const leitud = kasutajad.find(kasutaja => kasutaja.name.substring(0,1) === "C");
     console.log(leitud);
   }
 
