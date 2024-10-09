@@ -1,0 +1,67 @@
+.App {
+  text-align: center;
+}
+
+.nupp{
+  font-weight: bold;
+  border-color: rgb(23, 21, 163);
+}
+.nupp:hover{
+  background-color: blueviolet;
+  cursor:pointer
+}
+.nupp:active{
+  background-color: yellow;
+}
+.pilt:hover{
+  opacity: 50%;
+  cursor: pointer;
+}
+.pilt:active{
+  transform: scale(90%);
+}
+.pilt-mitteaktiivne{
+  height: 50px;
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
+.pilt{
+  width: 75px;
+  height: 75px;
+  border-radius: 5%;
+}
+body{
+  background-color: rgb(151, 197, 228);
+}
+.summa-aktiivne{
+  border-color: red;
+  border-width: 3px;
+}
+.linn-aktiivne{
+  text-decoration:underline;
+}
+.keel-aktiivne{
+  padding: 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: red;
+}
+.keel{
+  padding: 20px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+.map{
+  height: 350px;
+  margin: 3%;
+  border-radius: 10px;
+}
+td, th{
+  border:1px solid black;
+}
+th{
+  background-color: orange;
+}
+table{
+  margin:auto;
+}
