@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  
 }
 
 .nupp{
@@ -31,26 +32,10 @@
   border-radius: 5%;
 }
 body{
-  background-color: rgb(151, 197, 228);
+  background-color: orange;
 }
-.summa-aktiivne{
-  border-color: red;
-  border-width: 3px;
-}
-.linn-aktiivne{
-  text-decoration:underline;
-}
-.keel-aktiivne{
-  padding: 20px;
-  font-weight: bold;
-  border-radius: 5px;
-  background-color: red;
-}
-.keel{
-  padding: 20px;
-  font-weight: bold;
-  border-radius: 5px;
-}
+
+
 .map{
   height: 350px;
   margin: 3%;
@@ -64,4 +49,26 @@ th{
 }
 table{
   margin:auto;
+}
+.NotFound{
+  background-color: orange;
+}
+.NotFound-body {
+  background-color: orange !important; /* Makes the entire body background red */
+}
+.navbar{
+  background-color: rgb(95, 95, 161);
+}
+.nav-link{
+  color: white;
+  font-weight: 500; 
+}
+.fourofour{
+  width: 700px;
+}
+.frame{
+  border: 5px solid;
+  border-radius: 25px;
+  /* padding: 5px; */
+  border-color: rgb(95, 95, 161);
 }

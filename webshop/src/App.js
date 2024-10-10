@@ -17,12 +17,12 @@ import MaintainShops from "./pages/admin/MaintainShops"
 
 import Login from "./pages/auth/Login"
 import Signup from "./pages/auth/Signup"
-
+import NotFound from "./pages/global/NotFound"
 
 function App() {
   return (
     <div className="App">
-      <NavigationBar></NavigationBar>
+      <NavigationBar  ></NavigationBar>
 
       <Routes>
         <Route path='' element={<HomePage/>}></Route>
@@ -42,7 +42,7 @@ function App() {
         <Route path='login' element={<Login/>}></Route>
         <Route path='signup' element={<Signup/>}></Route>
 
-        <Route></Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
      
     </div>
