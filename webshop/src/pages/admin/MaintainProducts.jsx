@@ -25,8 +25,8 @@ function MaintainProducts() {
       <tbody>
       {products.map((product, index)=>
         <tr key={index}>
-          <td><img style={{"width":"50px"}} src={product.picture} alt="" /></td>
-          <td>{product.name}</td>
+          <td><img style={{"width":"50px"}} src={product.image} alt="" /></td>
+          <td>{product.title}</td>
           <td>{product.price}€</td>
          
           <td>

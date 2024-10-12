@@ -23,17 +23,15 @@ function Cart() {
     product.forEach(product => summa = summa + product.price);
     return summa;
   }
-  const aggregatedItems = product.reduce((acc, { id, quantity }) => {
-    if (!acc[id]) {
-        acc[id] = { id, quantity: 0 };
-    }
-    acc[id].quantity += quantity;
-    return acc;
-}, {});
+//   const aggregatedItems = product.reduce((acc, { id, quantity }) => {
+//     if (!acc[id]) {
+//         acc[id] = { id, quantity: 0 };
+//     }
+//     acc[id].quantity += quantity;
+//     return acc;
+// }, {});
 
-  function BasicExample() {
-    return <CloseButton />;
-  }
+ 
   return (
     <div>
       
@@ -46,7 +44,7 @@ function Cart() {
           {index}
           {product.title} <br /> <img src={product.image} alt={product.title} style={{ width: '40px', height: 'auto' }} /> {product.price} <br /> 
            
-          <button onClick={() => remove(index)} > <CloseButton/> </button> 
+           <CloseButton  onClick={() => remove(index)}/> 
         </div>)}
         { product.length === 0 &&
        <>
