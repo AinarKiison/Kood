@@ -8,6 +8,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function HomePage() {
@@ -67,11 +68,15 @@ function HomePage() {
     products.sort((a, b) => b.rating.rate - a.rating.rate);
     setProducts(products.slice());
   }
+
+  const notify = () => toast("RESET!");
  
 
   return (
     <div>
-      <Button onClick={reset} variant="outlined">Reset</Button>
+      <Button onClick={() => { reset(); notify(); }} className='reset-btn' variant="secondary">
+  Reset
+</Button>
       
       <ButtonGroup>
       <Button onClick={sortAZ}>Sort A-Z</Button>
@@ -102,7 +107,7 @@ function HomePage() {
           <div>Rating: {product.rating.rate}</div> {/* Display the rating */}
 
           <Link to={"/product/" +  product.title}>
-        <Button variant="outlined">More</Button> 
+        <Button variant="">More</Button> 
           </Link>
 
           {< button className='buttoncart' onClick={() => addToCart(product)}>Add to cart</button> }
@@ -110,9 +115,14 @@ function HomePage() {
 
       )}
         <ToastContainer
-           position="top-right"
-           autoClose={2000}
-           theme="dark" /> 
+            position="top-right" 
+            autoClose={3000} 
+            hideProgressBar={false} 
+            newestOnTop={false} 
+            closeOnClick 
+            pauseOnHover 
+            draggable 
+            pauseOnFocusLoss /> 
     </div>
   );
 }

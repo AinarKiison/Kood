@@ -85,3 +85,7 @@ table{
 .span{
   margin: 10px;
 }
+.reset-btn{
+  margin-right: 5px;
+  background-color: black;
+}

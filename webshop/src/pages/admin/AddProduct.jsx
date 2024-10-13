@@ -9,6 +9,8 @@ function AddProduct() {
   const descriptionRef = useRef();
   const categoryRef = useRef();
   const imageRef = useRef();
+  const rateRef = useRef();
+  const countRef = useRef();
   
   function add(){
     if(titleRef.current.value === ""){
@@ -22,7 +24,11 @@ function AddProduct() {
         "price":Number(priceRef.current.value),
         "description":descriptionRef.current.value,
         "category":categoryRef.current.value,
-        "image": imageRef.current.value
+        "image": imageRef.current.value,
+        "rating":{
+          "rate":Number(rateRef.current.value),
+          "count":Number(countRef.current.value)
+        }
       }
       productsJSON.push(addedProduct);
     }
@@ -61,6 +67,10 @@ function AddProduct() {
       <input ref={descriptionRef} type="text" /><br />
       <label>Category:</label><br />
       <input ref={categoryRef} type="text" /><br />
+      <label>Rating (Rate):</label><br />
+      <input ref={rateRef} type="number" step="0.1" /><br />
+      <label>Rating (Count):</label><br />
+      <input ref={countRef} type="number" /><br />
       
       <br />
     
