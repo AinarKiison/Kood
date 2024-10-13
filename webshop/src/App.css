@@ -1,6 +1,11 @@
 .App {
   text-align: center;
-  
+}
+
+.App-dark{
+  text-align: center;
+  background-color: rgb(75, 75, 75);
+  color: white;
 }
 
 .nupp{

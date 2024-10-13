@@ -18,10 +18,31 @@ import MaintainShops from "./pages/admin/MaintainShops"
 import Login from "./pages/auth/Login"
 import Signup from "./pages/auth/Signup"
 import NotFound from "./pages/global/NotFound"
+import { useState } from 'react';
 
 function App() {
+
+const[darkMode, setDarkMode] = useState(localStorage.getItem("darkTheme"));
+
+const darkThemeTrue = () => {
+  setDarkMode("true");
+  localStorage.setItem("darkTheme","true");
+}
+const darkThemeFalse = () => {
+  setDarkMode("false");
+  localStorage.setItem("darkTheme","false");
+}
+
+
+
+
   return (
-    <div className="App">
+    <div className={darkMode === "true" ? "App-dark" : "App"}>
+      
+      <button onClick={darkThemeTrue}>Dark</button>
+      <button onClick={darkThemeFalse}>Light</button>
+  
+
       <NavigationBar  ></NavigationBar>
 
       <Routes>
