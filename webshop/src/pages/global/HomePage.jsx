@@ -11,11 +11,11 @@ import { Link } from 'react-router-dom';
 
 
 function HomePage() {
-  const [products, setProducts] = useState(productsFromJSON);
+  const [products, setProducts] = useState(productsFromJSON.slice());
 
-  // const reset = () => {
-  //   setProducts (productsjson.slice());
-  // }
+  const reset = () => {
+    setProducts (productsFromJSON.slice());
+  }
 
   const addToCart = (addedProduct) => {
     cartJSON.push(addedProduct);
@@ -71,6 +71,7 @@ function HomePage() {
 
   return (
     <div>
+      <Button onClick={reset} variant="outlined">Reset</Button>
       
       <ButtonGroup>
       <Button onClick={sortAZ}>Sort A-Z</Button>
@@ -91,19 +92,19 @@ function HomePage() {
      
 
 
-      {products.map(product =>
-        <div key={product.id}><br />
+      {products.map((product, index) =>
+        <div key={index}><br />
           <img className="frame"   style={{width:"150px"}} src={product.image} alt="" />
           
           <div className='productitle'>{product.title}</div>
           <div className='productitle'>{product.price}€</div>
+
           <div>Rating: {product.rating.rate}</div> {/* Display the rating */}
+
           <Link to={"/product/" +  product.title}>
         <Button variant="outlined">More</Button> 
-
-
-        
           </Link>
+
           {< button className='buttoncart' onClick={() => addToCart(product)}>Add to cart</button> }
           </div>
 
