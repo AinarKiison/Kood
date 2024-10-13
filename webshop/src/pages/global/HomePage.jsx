@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import productsFromJSON from "../../data/products.json";
-import cartJSON from "../../data/cart.json";
+//import cartJSON from "../../data/cart.json";
 import Button from 'react-bootstrap/Button';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -18,10 +18,16 @@ function HomePage() {
     setProducts (productsFromJSON.slice());
   }
 
-  const addToCart = (addedProduct) => {
-    cartJSON.push(addedProduct);
-    toast.success("Item added to cart");
-  };
+
+
+  const addToCart =(addedProduct)=>{
+    // ostukorvJSON.push(lisatudToode);
+    const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
+    cartLS.push(addedProduct);
+    localStorage.setItem("cart", JSON.stringify(cartLS));
+  }
+
+
 
   const sortAZ = () => {
     products.sort((a,b) => a.title.localeCompare(b.title))
