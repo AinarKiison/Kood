@@ -16,7 +16,9 @@ function HomePage() {
 
   const reset = () => {
     setProducts (productsFromJSON.slice());
+    toast("RESET");
   }
+ 
 
 
 
@@ -47,11 +49,11 @@ function HomePage() {
       }
 
       const filterElectronics = () => {
-        const filteredProducts = productsFromJSON.filter(product => product.category.includes ("electronics"));
+        const filteredProducts = productsFromJSON.filter(product => product.category === "electronics");
       setProducts(filteredProducts);
       }
       const filterJewelery = () => {
-        const filteredProducts = productsFromJSON.filter(product => product.category.includes ("jewelery"));
+        const filteredProducts = productsFromJSON.filter(product => product.category === "jewelery");
       setProducts(filteredProducts);
       }
       const filterMensClothing = () => {
@@ -59,7 +61,7 @@ function HomePage() {
       setProducts(filteredProducts);
       }
       const filterWomensClothing = () => {
-        const filteredProducts = productsFromJSON.filter(product => product.category.includes ("women's clothing"));
+        const filteredProducts = productsFromJSON.filter(product => product.category === "women's clothing");
       setProducts(filteredProducts);
       }
 
@@ -75,14 +77,14 @@ function HomePage() {
     setProducts(products.slice());
   }
 
-  const notify = () => toast("RESET!");
+
  
 
   return (
     <div>
-      <Button onClick={() => { reset(); notify(); }} className='reset-btn' variant="secondary">
-  Reset
-</Button>
+    <Button onClick={ reset} className='reset-btn' variant="secondary">
+    Reset
+    </Button>
       
       <ButtonGroup>
       <Button onClick={sortAZ}>Sort A-Z</Button>

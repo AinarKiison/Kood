@@ -19,6 +19,9 @@ import Login from "./pages/auth/Login"
 import Signup from "./pages/auth/Signup"
 import NotFound from "./pages/global/NotFound"
 import { useState } from 'react';
+import Supplier from './pages/admin/Supplier';
+import Electricity from './pages/admin/Electricity';
+
 
 function App() {
 
@@ -43,22 +46,23 @@ const darkThemeFalse = () => {
       <button onClick={darkThemeFalse}>Light</button>
   
 
-      <NavigationBar  ></NavigationBar>
+      <NavigationBar ></NavigationBar>
 
       <Routes>
         <Route path='' element={<HomePage/>}></Route>
         <Route path='contact' element={<ContactUs/>}></Route>
         <Route path='shops' element={<Shops/>}></Route>
         <Route path='cart' element={<Cart/>}></Route>
-        <Route path='product/:index' element={<SingleProduct/>}></Route>
+        <Route path='product/:productName' element={<SingleProduct/>}></Route>
         
-
         <Route path='admin' element={<AdminHome/>}></Route>
         <Route path='admin/add-product' element={<AddProduct/>}></Route>
         <Route path='admin/edit-product/:index' element={< EditProduct />}></Route>
         <Route path='admin/maintain-products' element={<MaintainProducts/>}></Route>
         <Route path='admin/maintain-categories' element={<MaintainCategories/>}></Route>
         <Route path='admin/maintain-shops' element={<MaintainShops/>}></Route>
+        <Route path='admin/supplier' element={<Supplier/>}></Route>
+        <Route path='admin/electricity' element={<Electricity/>}></Route>
 
         <Route path='login' element={<Login/>}></Route>
         <Route path='signup' element={<Signup/>}></Route>

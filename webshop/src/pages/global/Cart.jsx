@@ -2,20 +2,21 @@ import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 //import cartJSON from "../../data/cart.json"
 import CloseButton from 'react-bootstrap/CloseButton';
+import ParcelMachines from '../../components/ParcelMachines';
 
 
 function Cart() {
-  const [products, changeProducts] = useState (JSON.parse(localStorage.getItem("cart")) || [] );
+  const [products, setProducts] = useState (JSON.parse(localStorage.getItem("cart")) || [] );
 
   const empty = () => {
     products.splice(0);
-    changeProducts(products.slice());
+    setProducts(products.slice());
     localStorage.setItem("cart", JSON.stringify(products));
   }
 
   const remove = (index) => {
     products.splice(index,1);
-    changeProducts(products.slice());
+    setProducts(products.slice());
     localStorage.setItem("cart", JSON.stringify(products));
   }
   
@@ -54,7 +55,9 @@ function Cart() {
       </>}
 
 
-        {products.length > 0 && <div>Amount: {addAll()}€ </div>}
+        {products.length > 0 && <div>
+          <ParcelMachines/>
+          Amount: {addAll()}€ </div>}
     </div>
 
   )

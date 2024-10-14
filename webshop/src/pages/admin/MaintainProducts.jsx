@@ -20,7 +20,7 @@ function MaintainProducts() {
   }
 
 
-  const notify = () => toast("Changed!");
+ 
 
   return (
     <div>
@@ -39,17 +39,18 @@ function MaintainProducts() {
       </thead>
       <tbody>
       {products.map((product, index)=>
-        <tr key={index}>
+        <tr key={index} className={product.active === true ? "active":"inactive"}>
           <td><img style={{"width":"50px"}} src={product.image} alt="" /></td>
           <td>{product.title}</td>
           <td>{product.price}€</td>
-         
+
+        
           <td>
           <button onClick={() => deletes(index)}>X</button>
 
-          <Link to={"admin/maintain-products/" + index}>
+          <Link to={"/admin/edit-product/" + index}>
           
-            <button  onClick={notify}>Change</button>
+            <button >Change</button>
 
             <ToastContainer
              position="top-right" 

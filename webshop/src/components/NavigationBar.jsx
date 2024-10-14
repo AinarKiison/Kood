@@ -26,6 +26,8 @@ function NavigationBar() {
             <NavDropdown.Item  as={Link} to="/admin/maintain-shops">Maintain Shops</NavDropdown.Item>
             <NavDropdown.Item  as={Link} to="/admin/maintain-products">Maintain Products</NavDropdown.Item>
             <NavDropdown.Item  as={Link} to="/admin/maintain-categories">Maintain Categories</NavDropdown.Item>
+            <NavDropdown.Item  as={Link} to="/admin/supplier">Supplier</NavDropdown.Item>
+            <NavDropdown.Item  as={Link} to="/admin/electricity">Electricity</NavDropdown.Item>
           </NavDropdown>
           <Nav.Link as={Link} to="">Home</Nav.Link>
           <Nav.Link as={Link} to="/shops">Shops</Nav.Link>
