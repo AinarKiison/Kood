@@ -1,25 +1,35 @@
-import React, { useState, useRef} from 'react'
-import productsJSON from "../../data/products.json"
+import React, { useState, useRef, useEffect} from 'react'
+// import productsJSON from "../../data/products.json"
 import { Link } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function MaintainProducts() {
-  const [products, changeProducts] = useState (productsJSON.slice());
+  const [products, setProducts] = useState ([]);
 
   const searchRef = useRef();
+  const url = "https://webshop-ainar-dab59-default-rtdb.europe-west1.firebasedatabase.app/products.json"
+
+  useEffect (()=> {
+    fetch(url)
+    .then(res=> res.json())
+    .then(json=> setProducts (json || []))
+  }, []);
+
 
   const deletes = (index)=>{
-    productsJSON.splice(index, 1);
-    changeProducts(productsJSON.slice());
+    products.splice(index, 1);
+    setProducts(products.slice());
    }
 
    const search=()=>{
-    const answer = productsJSON.filter(product => product.title.includes(searchRef.current.value)); 
-    changeProducts(answer);
+    const answer = products.filter(product => product.title.includes(searchRef.current.value)); 
+    setProducts(answer);
   }
 
+if(products.length === 0){
 
+}
  
 
   return (

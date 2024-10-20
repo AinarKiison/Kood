@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import productJSON from '../../data/products.json';
+// import productJSON from '../../data/products.json';
 
 function SingleProduct() {
   const { productName } = useParams();  // Ensure this matches your route definition
-  const foundProduct = productJSON.find(product => product.title === productName);
+  const[products,setProducts]=useState([]);
+  const foundProduct = products.find(product => product.title === productName);
+
+  const url = "https://webshop-ainar-dab59-default-rtdb.europe-west1.firebasedatabase.app/products.json"
+
+  useEffect (()=> {
+    fetch(url)
+    .then(res=> res.json())
+    .then(json=> setProducts (json || []))
+  }, []);
 
   if (!foundProduct) {
     return <div>No product found</div>;

@@ -1,7 +1,7 @@
 
-import React, { useState } from 'react';
-import productsFromJSON from "../../data/products.json";
-//import cartJSON from "../../data/cart.json";
+import React, { useEffect, useState } from 'react';
+// import productsFromJSON from "../../data/products.json";
+// import cartJSON from "../../data/cart.json";
 import Button from 'react-bootstrap/Button';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -12,22 +12,29 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 function HomePage() {
-  const [products, setProducts] = useState(productsFromJSON.slice());
+  const [products, setProducts] = useState([]);
 
-  const reset = () => {
-    setProducts (productsFromJSON.slice());
-    toast("RESET");
-  }
- 
+const url = "https://webshop-ainar-dab59-default-rtdb.europe-west1.firebasedatabase.app/products.json"
+
+useEffect (()=> {
+  fetch(url)
+  .then(res=> res.json())
+  .then(json=> setProducts (json || []))
+}, []);
+
+const reset = () => {
+  setProducts (products.slice());
+  toast("RESET");
+}
 
 
-
-  const addToCart =(addedProduct)=>{
-    // ostukorvJSON.push(lisatudToode);
-    const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
-    cartLS.push(addedProduct);
-    localStorage.setItem("cart", JSON.stringify(cartLS));
-  }
+//  SIIN on kodune. Viia andmebaasi üle
+const addToCart =(addedProduct)=>{
+  // ostukorvJSON.push(lisatudToode);
+  const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
+  cartLS.push(addedProduct);
+  localStorage.setItem("cart", JSON.stringify(cartLS));
+}
 
 
 
@@ -49,19 +56,19 @@ function HomePage() {
       }
 
       const filterElectronics = () => {
-        const filteredProducts = productsFromJSON.filter(product => product.category === "electronics");
+        const filteredProducts = products.filter(product => product.category === "electronics");
       setProducts(filteredProducts);
       }
       const filterJewelery = () => {
-        const filteredProducts = productsFromJSON.filter(product => product.category === "jewelery");
+        const filteredProducts = products.filter(product => product.category === "jewelery");
       setProducts(filteredProducts);
       }
       const filterMensClothing = () => {
-        const filteredProducts = productsFromJSON.filter(product => product.category === "men's clothing" );
+        const filteredProducts = products.filter(product => product.category === "men's clothing" );
       setProducts(filteredProducts);
       }
       const filterWomensClothing = () => {
-        const filteredProducts = productsFromJSON.filter(product => product.category === "women's clothing");
+        const filteredProducts = products.filter(product => product.category === "women's clothing");
       setProducts(filteredProducts);
       }
 
@@ -113,6 +120,7 @@ function HomePage() {
           <div className='productitle'>{product.price}€</div>
 
           <div>Rating: {product.rating.rate}</div> {/* Display the rating */}
+          <div>Count: {product.rating.count}</div> {/* Display the rating count*/}
 
           <Link to={"/product/" +  product.title}>
         <Button variant="">More</Button> 

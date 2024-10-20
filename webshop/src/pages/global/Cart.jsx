@@ -58,6 +58,8 @@ function Cart() {
         {products.length > 0 && <div>
           <ParcelMachines/>
           Amount: {addAll()}€ </div>}
+
+          {/* <Payment></Payment> */}
     </div>
 
   )

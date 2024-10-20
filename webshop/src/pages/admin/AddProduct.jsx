@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react'
-import productsJSON from "../../data/products.json"
+import React, { useState, useRef, useEffect } from 'react'
+// import productsJSON from "../../data/products.json"
 
 function AddProduct() {
   const [message, changeMessage] = useState("Add new product");
@@ -11,6 +11,16 @@ function AddProduct() {
   const imageRef = useRef();
   const rateRef = useRef();
   const countRef = useRef();
+
+  const url = "https://webshop-ainar-dab59-default-rtdb.europe-west1.firebasedatabase.app/products.json"
+  const[products, setProducts] = useState([]);
+
+  useEffect (()=> {
+    fetch(url)
+    .then(res=> res.json())
+    .then(json=> setProducts (json || []))
+  }, []);
+
   
   function add(){
     if(titleRef.current.value === ""){
@@ -25,12 +35,15 @@ function AddProduct() {
         "description":descriptionRef.current.value,
         "category":categoryRef.current.value,
         "image": imageRef.current.value,
+        "active":true,
         "rating":{
           "rate":Number(rateRef.current.value),
           "count":Number(countRef.current.value)
         }
       }
-      productsJSON.push(addedProduct);
+      // productsJSON.push(addedProduct);
+      products.push(addedProduct);
+      fetch(url, {method: "PUT", body: JSON.stringify(products)});
     }
   
     const control =() => {

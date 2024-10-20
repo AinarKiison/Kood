@@ -1,11 +1,11 @@
-import React ,{useRef} from 'react'
+import React ,{useEffect, useRef, useState} from 'react'
 import{useParams} from "react-router-dom"
-import productsFromFile from "../../data/products.json"
+// import productsFromFile from "../../data/products.json"
 
 function EditProduct() {
   const{index} = useParams();
-  const found = productsFromFile[index];
-
+  const [products, setProducts] = useState([]);
+  const found = products[index];
   const idRef = useRef();
   const titleRef = useRef();
   const priceRef = useRef();
@@ -17,10 +17,19 @@ function EditProduct() {
   const activeRef = useRef();
 
 
+  const url = "https://webshop-ainar-dab59-default-rtdb.europe-west1.firebasedatabase.app/products.json"
+
+useEffect (()=> {
+  fetch(url)
+  .then(res=> res.json())
+  .then(json=> setProducts (json || []))
+}, []);
+
+  
   const edit = () => {
-    productsFromFile[index] = {
-       "id":idRef.current.value,
-        "name":titleRef.current.value,
+    products[index] = {
+       "id":Number(idRef.current.value),
+        "title":titleRef.current.value,
         "price":Number(priceRef.current.value),
         "description":descriptionRef.current.value,
         "category":categoryRef.current.value,
@@ -28,8 +37,13 @@ function EditProduct() {
         "rating":{
           "rate":Number(rateRef.current.value),
           "count":Number(countRef.current.value)},
-        "active":activeRef.current.value 
+        "active":activeRef.current.checked
   }
+  fetch(url, {method: "PUT", body: JSON.stringify(products)});
+}
+
+if(found === undefined){
+  return <div>Product not found</div>
 }
 
   return (
@@ -38,7 +52,7 @@ function EditProduct() {
       <label>Product Name: </label><br />
       <input ref={titleRef} type="text" defaultValue={found.title}/><br />
       <label>ID:</label><br />
-      <input ref={idRef} type="text" defaultValue={found.id}/><br />
+      <input ref={idRef} type="number" defaultValue={found.id}/><br />
       <label>Image:</label><br />
       <input ref={imageRef} type="text" defaultValue={found.image}/><br />
       <label>Price:</label><br />
@@ -52,7 +66,7 @@ function EditProduct() {
       <label>Rating (Count):</label><br />
       <input ref={countRef} type="number" defaultValue={found.count}/><br />
       <label>Active:</label><br />
-      <input ref={activeRef} type="text" defaultValue={found.active}/><br />
+      <input ref={activeRef} type="checkbox" defaultValue={found.active}/><br />
 
       <button onClick={edit}>Edit</button>
 

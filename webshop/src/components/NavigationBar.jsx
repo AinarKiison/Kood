@@ -21,7 +21,7 @@ function NavigationBar() {
           <NavDropdown  title="Admin" id="collapsible-nav-dropdown">
             <NavDropdown.Item  as={Link} to="/admin">Home</NavDropdown.Item>
             <NavDropdown.Item  as={Link} to="/admin/add-product">Add Product</NavDropdown.Item>
-            <NavDropdown.Item  as={Link} to="/admin/edit-product/:index">Edit Product</NavDropdown.Item>
+            {/* <NavDropdown.Item  as={Link} to="/admin/edit-product/:index">Edit Product</NavDropdown.Item> */}
             <NavDropdown.Divider />
             <NavDropdown.Item  as={Link} to="/admin/maintain-shops">Maintain Shops</NavDropdown.Item>
             <NavDropdown.Item  as={Link} to="/admin/maintain-products">Maintain Products</NavDropdown.Item>
