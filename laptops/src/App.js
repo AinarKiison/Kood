@@ -5,6 +5,7 @@ import VaataArvuteid from './pages/VaataArvuteid';
 import LisaArvuti from './pages/LisaArvuti';
 import Seaded from "./pages/Seaded";
 import Ostukorv from "./pages/Ostukorv";
+import Tooted from './pages/Tooted';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Link to="/add"><button>Lisa sülearvuti</button></Link>
       <Link to="/seaded"><button>Seadetesse</button></Link>
       <Link to="/cart"><button>Ostukorv</button></Link>
+      <Link to="/products"><button>Vaata tooteid</button></Link>
 
       <Routes>
         <Route path="" exact element={<Avaleht/>}></Route>
@@ -23,6 +25,7 @@ function App() {
         <Route path="add" exact element={<LisaArvuti/>}></Route>
         <Route path="cart" exact element={<Ostukorv/>}></Route>
         <Route path="seaded" element= {<Seaded/>}></Route>
+        <Route path="products" element= {<Tooted/>}></Route>
       </Routes>
 
     </div>
