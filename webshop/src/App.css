@@ -1,12 +1,19 @@
 .App {
   text-align: center;
 }
-
+body{
+  background-color: orange;
+}
 .App-dark{
   text-align: center;
   background-color: rgb(75, 75, 75);
   color: white;
   min-height: 100vh;
+}
+.map{
+  height: 350px;
+  margin: 3%;
+  border-radius: 10px;
 }
 
 .nupp{
@@ -37,16 +44,10 @@
   height: 75px;
   border-radius: 5%;
 }
-body{
-  background-color: orange;
-}
 
 
-.map{
-  height: 350px;
-  margin: 3%;
-  border-radius: 10px;
-}
+
+
 td, th{
   border:1px solid black;
 }
@@ -70,7 +71,7 @@ table{
   font-weight: 500; 
 }
 .fourofour{
-  width: 700px;
+  width: 600px;
 }
 .frame{
   border: 5px solid;
@@ -83,10 +84,6 @@ table{
   background-color: rgb(95, 95, 161) ;
   color: white;
 }
-.productitle{
-  font-weight: 700;
-}
-
 
 .span{
   margin: 10px;
@@ -96,6 +93,7 @@ table{
   background-color: black;
 }
 
-.active{
-  
+.hind{
+  color: aliceblue;
+  font-weight: bold;
 }

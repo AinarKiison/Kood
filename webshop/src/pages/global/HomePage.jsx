@@ -1,25 +1,45 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 // import productsFromJSON from "../../data/products.json";
 // import cartJSON from "../../data/cart.json";
-import Button from 'react-bootstrap/Button';
+
+// import Button from 'react-bootstrap/Button';
+import {Button as MuiButton} from '@mui/material';
+
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
+// import Dropdown from 'react-bootstrap/Dropdown';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
+import DropdownItem from 'react-bootstrap/esm/DropdownItem';
+import SortButtons from '../../components/SortButtons';
+import { CartSumContext } from '../../store/CartSumContext';
+import styles from "../../css/HomePage.module.css";
 
 
 function HomePage() {
   const [products, setProducts] = useState([]);
+  const [dbProducts, setDbProducts] = useState([]);
+  const {setCartSum} = useContext(CartSumContext);
 
 const url = "https://webshop-ainar-dab59-default-rtdb.europe-west1.firebasedatabase.app/products.json"
+
+const[categories, setCategories] = useState([]);
+  const categoryDburl =  "https://webshop-ainar-dab59-default-rtdb.europe-west1.firebasedatabase.app/categories.json"
+  useEffect (()=> {
+    fetch(categoryDburl)
+    .then(res=> res.json())
+    .then(json=> setCategories (json || []))
+  }, []);
 
 useEffect (()=> {
   fetch(url)
   .then(res=> res.json())
-  .then(json=> setProducts (json || []))
+  .then(json=> {
+    setProducts (json || [])
+    setDbProducts (json || [])
+  });
 }, []);
 
 const reset = () => {
@@ -32,106 +52,97 @@ const reset = () => {
 const addToCart =(addedProduct)=>{
   // ostukorvJSON.push(lisatudToode);
   const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
-  cartLS.push(addedProduct);
+  const cartProduct = cartLS.find(product => product.toode.id === addedProduct.id); 
+  if(cartProduct !== undefined){
+//koguse suurendus kui 1 olmeas
+cartProduct.kogus = cartProduct.kogus + 1;
+  } else{ cartLS.push({kogus:1, toode: addedProduct});
+//lõppu 1 juurde
+  }
   localStorage.setItem("cart", JSON.stringify(cartLS));
-}
+
+  let sum = 0;
+  cartLS.forEach(product => sum = sum + product.toode.price * product.kogus);
+  setCartSum(sum);
+
+};
 
 
 
-  const sortAZ = () => {
-    products.sort((a,b) => a.title.localeCompare(b.title))
-    setProducts(products.slice());
-  }
-  const sortZA = () => {
-    products.sort((a,b) => b.title.localeCompare(a.title))
-    setProducts(products.slice());
-  }
-  const sortAscendingPrice = () => {
-    products.sort((a, b) => a.price - b.price);
-    setProducts(products.slice());
-    }
-    const sortDecendingPrice = () => {
-      products.sort((a, b) => b.price - a.price);
-      setProducts(products.slice());
-      }
 
-      const filterElectronics = () => {
-        const filteredProducts = products.filter(product => product.category === "electronics");
-      setProducts(filteredProducts);
-      }
-      const filterJewelery = () => {
-        const filteredProducts = products.filter(product => product.category === "jewelery");
-      setProducts(filteredProducts);
-      }
-      const filterMensClothing = () => {
-        const filteredProducts = products.filter(product => product.category === "men's clothing" );
-      setProducts(filteredProducts);
-      }
-      const filterWomensClothing = () => {
-        const filteredProducts = products.filter(product => product.category === "women's clothing");
-      setProducts(filteredProducts);
-      }
 
-       // Sorting by Rating Ascending
-    const sortRatingAscending = () => {
-    products.sort((a, b) => a.rating.rate - b.rating.rate);
-    setProducts(products.slice());
-  }
-
-  // Sorting by Rating Descending
-    const sortRatingDescending = () => {
-    products.sort((a, b) => b.rating.rate - a.rating.rate);
-    setProducts(products.slice());
+     
+  const filter = (categoryClicked) => {
+    const filteredProducts = dbProducts.filter(product => product.category === categoryClicked);
+  setProducts(filteredProducts);
   }
 
 
+
+
+
+   // const filterElectronics = () => {
+      //   const filteredProducts = products.filter(product => product.category === "electronics");
+      // setProducts(filteredProducts);
+      // }
+      // const filterJewelery = () => {
+      //   const filteredProducts = products.filter(product => product.category === "jewelery");
+      // setProducts(filteredProducts);
+      // }
+      // const filterMensClothing = () => {
+      //   const filteredProducts = products.filter(product => product.category === "men's clothing" );
+      // setProducts(filteredProducts);
+      // }
+      // const filterWomensClothing = () => {
+      //   const filteredProducts = products.filter(product => product.category === "women's clothing");
+      // setProducts(filteredProducts);
+      // }
  
 
   return (
     <div>
-    <Button onClick={ reset} className='reset-btn' variant="secondary">
+    <MuiButton variant="contained" color="success"onClick={ reset} >
     Reset
-    </Button>
+    </MuiButton>
       
       <ButtonGroup>
-      <Button onClick={sortAZ}>Sort A-Z</Button>
-      <Button onClick={sortZA}>Sort Z-A</Button>
-      <Button onClick={sortAscendingPrice}>Price ascending</Button>
-      <Button onClick={sortDecendingPrice}>Price decending</Button>
-      <Button onClick={sortRatingAscending}>Rating ascending</Button>
-      <Button onClick={sortRatingDescending}>Rating descending</Button>
+        <SortButtons products={products} setProducts={setProducts}></SortButtons>
      
       <DropdownButton as={ButtonGroup} title="Select Category" id="category-dropdown">
-        <Dropdown.Item onClick={filterMensClothing} >Men's clothing</Dropdown.Item>
+        {/* <Dropdown.Item onClick={filterMensClothing} >Men's clothing</Dropdown.Item>
         <Dropdown.Item onClick={filterWomensClothing}>Women's clothing</Dropdown.Item>
         <Dropdown.Item onClick={filterJewelery} >Jewelery</Dropdown.Item>
-        <Dropdown.Item onClick={filterElectronics} >Electronics</Dropdown.Item>
+        <Dropdown.Item onClick={filterElectronics} >Electronics</Dropdown.Item> */}
+        {categories.map(category=>
+          <DropdownItem onClick={()=> filter(category.name)} >{category.name}</DropdownItem>
+        )}
       </DropdownButton>
       </ButtonGroup>
     
      
 
-
+<div className={styles.products}> 
       {products.map((product, index) =>
-        <div key={index}><br />
-          <img className="frame"   style={{width:"150px"}} src={product.image} alt="" />
+        <div className={styles.product} key={index}><br />
+          <img className={styles.image}  style={{width:"150px"}} src={product.image} alt="" />
           
-          <div className='productitle'>{product.title}</div>
-          <div className='productitle'>{product.price}€</div>
+          <div className={styles.title}>{product.title}</div>
+          <div className={styles.price}>{product.price}€</div>
 
           <div>Rating: {product.rating.rate}</div> {/* Display the rating */}
           <div>Count: {product.rating.count}</div> {/* Display the rating count*/}
 
           <Link to={"/product/" +  product.title}>
-        <Button variant="">More</Button> 
+             <button variant="">More</button> 
           </Link>
 
-          {< button className='buttoncart' onClick={() => addToCart(product)}>Add to cart</button> }
+          {< button className={styles.buttoncart} onClick={() => addToCart(product)}>Add to cart</button> }
           </div>
-
       )}
+</div>
+
         <ToastContainer
-            position="top-right" 
+            position="bottom-right" 
             autoClose={3000} 
             hideProgressBar={false} 
             newestOnTop={false} 

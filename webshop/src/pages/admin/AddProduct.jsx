@@ -15,6 +15,15 @@ function AddProduct() {
   const url = "https://webshop-ainar-dab59-default-rtdb.europe-west1.firebasedatabase.app/products.json"
   const[products, setProducts] = useState([]);
 
+  const[categories, setCategories] = useState([]);
+  const categoryDburl =  "https://webshop-ainar-dab59-default-rtdb.europe-west1.firebasedatabase.app/categories.json"
+
+  useEffect (()=> {
+    fetch(categoryDburl)
+    .then(res=> res.json())
+    .then(json=> setCategories (json || []))
+  }, []);
+
   useEffect (()=> {
     fetch(url)
     .then(res=> res.json())
@@ -78,8 +87,17 @@ function AddProduct() {
       <input ref={priceRef} type="number" /><br />
       <label>Description:</label><br />
       <input ref={descriptionRef} type="text" /><br />
+
       <label>Category:</label><br />
-      <input ref={categoryRef} type="text" /><br />
+      <select ref={categoryRef}>
+
+        {categories.map(category => <option>{category.name}</option>)}
+
+      
+      </select>
+      {/* <input ref={categoryRef} type="text" /> */}
+      <br />
+
       <label>Rating (Rate):</label><br />
       <input ref={rateRef} type="number" step="0.1" /><br />
       <label>Rating (Count):</label><br />

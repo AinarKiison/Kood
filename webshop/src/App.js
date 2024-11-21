@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes} from 'react-router-dom';
+import { Navigate, Route, Routes} from 'react-router-dom';
 import NavigationBar from "./components/NavigationBar"
 
 import HomePage from "./pages/global/HomePage"
@@ -18,12 +18,15 @@ import MaintainShops from "./pages/admin/MaintainShops"
 import Login from "./pages/auth/Login"
 import Signup from "./pages/auth/Signup"
 import NotFound from "./pages/global/NotFound"
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Supplier from './pages/admin/Supplier';
 import Electricity from './pages/admin/Electricity';
+import { AuthContext } from './store/AuthContext';
 
 
 function App() {
+
+const{loggedIn} =useContext(AuthContext);
 
 const[darkMode, setDarkMode] = useState(localStorage.getItem("darkTheme"));
 
@@ -49,12 +52,17 @@ const darkThemeFalse = () => {
       <NavigationBar ></NavigationBar>
 
       <Routes>
+
+        
+
         <Route path='' element={<HomePage/>}></Route>
         <Route path='contact' element={<ContactUs/>}></Route>
         <Route path='shops' element={<Shops/>}></Route>
         <Route path='cart' element={<Cart/>}></Route>
         <Route path='product/:productName' element={<SingleProduct/>}></Route>
         
+       {loggedIn === true &&
+       <>
         <Route path='admin' element={<AdminHome/>}></Route>
         <Route path='admin/add-product' element={<AddProduct/>}></Route>
         <Route path='admin/edit-product/:index' element={< EditProduct />}></Route>
@@ -63,7 +71,11 @@ const darkThemeFalse = () => {
         <Route path='admin/maintain-shops' element={<MaintainShops/>}></Route>
         <Route path='admin/supplier' element={<Supplier/>}></Route>
         <Route path='admin/electricity' element={<Electricity/>}></Route>
+        </>
+        }
 
+        {loggedIn === false && <Route path='admin/*' element={ <Navigate to="/login" />}/>}
+        
         <Route path='login' element={<Login/>}></Route>
         <Route path='signup' element={<Signup/>}></Route>
 

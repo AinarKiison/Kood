@@ -1,0 +1,23 @@
+
+.products{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  margin:3%;
+}
+.product{
+  border: 1px solid rgb(175, 175, 175);
+  padding: 10px;
+}
+.image{
+  width: 100px;
+  height: 200px;
+  transition: 1s;
+}
+.product:hover .image{
+  transform: scale(150%);
+  transition: 0.5s;
+}
+.title{
+  height: 90px;
+  font-weight: 650;
+}

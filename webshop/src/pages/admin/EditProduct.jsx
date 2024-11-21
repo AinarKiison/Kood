@@ -16,6 +16,15 @@ function EditProduct() {
   const countRef = useRef();
   const activeRef = useRef();
 
+  const[categories, setCategories] = useState([]);
+  const categoryDburl =  "https://webshop-ainar-dab59-default-rtdb.europe-west1.firebasedatabase.app/categories.json"
+
+  useEffect (()=> {
+    fetch(categoryDburl)
+    .then(res=> res.json())
+    .then(json=> setCategories (json || []))
+  }, []);
+
 
   const url = "https://webshop-ainar-dab59-default-rtdb.europe-west1.firebasedatabase.app/products.json"
 
@@ -59,12 +68,19 @@ if(found === undefined){
       <input ref={priceRef} type="number"defaultValue={found.price} /><br />
       <label>Description:</label><br />
       <input ref={descriptionRef} type="text" defaultValue={found.description}/><br />
+
+
       <label>Category:</label><br />
-      <input ref={categoryRef} type="text" defaultValue={found.category}/><br />
+      <select ref={categoryRef} defaultValue={found.category}>
+        {categories.map(category => <option>{category.name}</option>)}
+      </select>
+      {/* <input ref={categoryRef} type="text" defaultValue={found.category}/><br /> */}
+
+      <br />
       <label>Rating (Rate):</label><br />
-      <input ref={rateRef} type="number" step="0.1" defaultValue={found.rate}/><br />
+      <input ref={rateRef} type="number" step="0.1" defaultValue={found.rating.rate}/><br />
       <label>Rating (Count):</label><br />
-      <input ref={countRef} type="number" defaultValue={found.count}/><br />
+      <input ref={countRef} type="number" defaultValue={found.rating.count}/><br />
       <label>Active:</label><br />
       <input ref={activeRef} type="checkbox" defaultValue={found.active}/><br />
 
